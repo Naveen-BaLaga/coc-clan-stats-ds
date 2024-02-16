@@ -1,0 +1,4 @@
+language: python
+name: CoC Stats Dashboard Data Science
+packages:
+- path: helpers
