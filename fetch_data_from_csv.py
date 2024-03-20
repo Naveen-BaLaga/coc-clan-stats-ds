@@ -13,7 +13,7 @@ YourExBf,coLeader,17,232,16,8658,1,2000000000,2000000000,5613,11,114224,7924,283
 '''
 
 import csv
-from helpers.db_helpers import update_total_multiplayer_battles_won
+from helpers.db_helpers import update_total_multiplayer_battles_won, update_total_wall_destroyed
 
 def process_csv_and_update_db(file_path):
     # Read CSV file
@@ -42,7 +42,7 @@ def process_csv_and_update_db(file_path):
     total_wall_destroyed_data = [{"Name": row["Name"], "Total Wall Destroyed": int(row["Total Wall Destroyed"])} for row in data]
 
     # Sort data by Total Wall Destroyed in descending order
-    total_wall_destroyed_data.sort(key=lambda x: x["Wall Destroyed"], reverse=True)
+    total_wall_destroyed_data.sort(key=lambda x: x["Total Wall Destroyed"], reverse=True)
     
     #Generate JSON
     wall_destroyed_json_data = {
@@ -50,9 +50,9 @@ def process_csv_and_update_db(file_path):
         "Table Data": [{
             "Rank": i + 1,
             "Player Name": player["Name"],
-            "Total Multiplayer Battles Won": player["Total Wall Destroyed"],
+            "Total Wall Destroyed": player["Total Wall Destroyed"],
             "Previous Rank": "-"
-        } for i, player in enumerate(multiplayer_battles_won_data)]
+        } for i, player in enumerate(total_wall_destroyed_data)]
     }
     
     #print(multiplayer_battles_won_json_data)
