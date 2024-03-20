@@ -30,5 +30,5 @@ def update_total_multiplayer_battles_won(json_data):
             collection.insert_one(json_data)
         return True
     except Exception as e:
-        print("Error in updating total multipalyer battles won:", str(e))
+        print("Error in updating total multiplayer battles won:", str(e))
         return False

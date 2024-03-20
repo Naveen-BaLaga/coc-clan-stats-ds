@@ -22,26 +22,44 @@ def process_csv_and_update_db(file_path):
         data = list(reader)
 
     # Extract Name and Total Multiplayer Battles Won
-    player_data = [{"Name": row["Name"], "Total Multiplayer Battles Won": int(row["Total Multiplayer Battles Won"])} for row in data]
+    multiplayer_battles_won_data = [{"Name": row["Name"], "Total Multiplayer Battles Won": int(row["Total Multiplayer Battles Won"])} for row in data]
 
     # Sort data by Total Multiplayer Battles Won in descending order
-    player_data.sort(key=lambda x: x["Total Multiplayer Battles Won"], reverse=True)
+    multiplayer_battles_won_data.sort(key=lambda x: x["Total Multiplayer Battles Won"], reverse=True)
 
     # Generate JSON
-    json_data = {
+    multiplayer_battles_won_json_data = {
         "Table Name": "Highest Multiplayer Battles Won",
         "Table Data": [{
             "Rank": i + 1,
             "Player Name": player["Name"],
             "Total Multiplayer Battles Won": player["Total Multiplayer Battles Won"],
             "Previous Rank": "-"
-        } for i, player in enumerate(player_data)]
+        } for i, player in enumerate(multiplayer_battles_won_data)]
     }
+    
+    # Extract Name and Total Wall Destroyed
+    total_wall_destroyed_data = [{"Name": row["Name"], "Total Wall Destroyed": int(row["Total Wall Destroyed"])} for row in data]
 
-    #print(json_data)
+    # Sort data by Total Wall Destroyed in descending order
+    total_wall_destroyed_data.sort(key=lambda x: x["Wall Destroyed"], reverse=True)
+    
+    #Generate JSON
+    wall_destroyed_json_data = {
+        "Table Name": "Highest Walls Destroyed",
+        "Table Data": [{
+            "Rank": i + 1,
+            "Player Name": player["Name"],
+            "Total Multiplayer Battles Won": player["Total Wall Destroyed"],
+            "Previous Rank": "-"
+        } for i, player in enumerate(multiplayer_battles_won_data)]
+    }
+    
+    #print(multiplayer_battles_won_json_data)
     
     # Call the update function with the generated JSON data
-    update_total_multiplayer_battles_won(json_data)
+    update_total_multiplayer_battles_won(multiplayer_battles_won_json_data)
+    update_total_wall_destroyed(wall_destroyed_json_data)
 
 # Call the function with the CSV file path
 process_csv_and_update_db('full_players_data_from_clan.csv')
