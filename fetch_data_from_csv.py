@@ -35,7 +35,8 @@ def process_csv_and_update_db(file_path):
             "Player Name": player["Name"],
             "Total Multiplayer Battles Won": player["Total Multiplayer Battles Won"],
             "Previous Rank": "-"
-        } for i, player in enumerate(multiplayer_battles_won_data)]
+        } for i, player in enumerate(multiplayer_battles_won_data)],
+        "Table Header": "Total Multiplayer Battles Won"
     }
     
     # Extract Name and Total Wall Destroyed
@@ -52,7 +53,8 @@ def process_csv_and_update_db(file_path):
             "Player Name": player["Name"],
             "Total Wall Destroyed": player["Total Wall Destroyed"],
             "Previous Rank": "-"
-        } for i, player in enumerate(total_wall_destroyed_data)]
+        } for i, player in enumerate(total_wall_destroyed_data)],
+        "Table Header": "Total Walls Destroyed"
     }
     
     #print(multiplayer_battles_won_json_data)
