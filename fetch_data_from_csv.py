@@ -51,7 +51,7 @@ def process_csv_and_update_db(file_path):
         "Table Data": [{
             "Rank": i + 1,
             "Player Name": player["Name"],
-            "Total Wall Destroyed": player["Total Wall Destroyed"],
+            "Total Walls Destroyed": player["Total Wall Destroyed"],
             "Previous Rank": "-"
         } for i, player in enumerate(total_wall_destroyed_data)],
         "Table Header": "Total Walls Destroyed"
