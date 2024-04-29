@@ -7,7 +7,6 @@ base_url = 'http://127.0.0.1:5000'
 clan_id = '2YG89L2JU'
 
 # Run the below code only if you want to pull the clan data from the API
-'''
 
 clan_data = get_clan_data(base_url, clan_id)
 
@@ -24,7 +23,7 @@ with open(file_path, 'w') as json_file:
 
 print(f"Data successfully written to {file_path}")
 '''
-
+'''
 # Code for loading players' tags from the clan data
 try:
     # Open the JSON file and load its content as a dictionary
@@ -48,7 +47,7 @@ for member in members:
 print(list_of_tags)
 
 # Run the below code only if you want to pull the players' data from the API
-'''
+
 for tag in list_of_tags:
     player_data = get_player_data(base_url, tag)
     if player_data is not None:
@@ -62,7 +61,7 @@ for tag in list_of_tags:
 
     print(f"Data successfully written to {player_file_path}")
 '''
-
+'''
 # Code for writing full players' data to CSV
 
 full_col_names = [
