@@ -13,7 +13,7 @@ YourExBf,coLeader,17,232,16,8658,1,2000000000,2000000000,5613,11,114224,7924,283
 '''
 
 import csv
-from helpers.db_helpers import update_total_multiplayer_battles_won, update_total_wall_destroyed
+from helpers.db_helpers import *
 
 def process_csv_and_update_db(file_path):
     # Read CSV file
@@ -39,6 +39,9 @@ def process_csv_and_update_db(file_path):
         "Table Header": "Total Multiplayer Battles Won"
     }
     
+    # Update the Table
+    update_table(multiplayer_battles_won_json_data, "Highest Multiplayer Battles Won")
+    
     # Extract Name and Total Wall Destroyed
     total_wall_destroyed_data = [{"Name": row["Name"], "Total Wall Destroyed": int(row["Total Wall Destroyed"])} for row in data]
 
@@ -57,11 +60,186 @@ def process_csv_and_update_db(file_path):
         "Table Header": "Total Walls Destroyed"
     }
     
+    # Update the Table
+    update_table(wall_destroyed_json_data, "Highest Walls Destroyed")
+    
+    total_obstacles_removed_data = [{"Name": row["Name"], "Total Obstacles Removed": int(row["Total Obstacles Removed"])} for row in data]
+    
+    total_obstacles_removed_data.sort(key=lambda x: x["Total Obstacles Removed"], reverse=True)
+    
+    total_obstacles_removed_json_data = {
+        "Table Name": "Most Obstacles Removed",
+        "Table Data": [{
+            "Rank": i + 1,
+            "Player Name": player["Name"],
+            "Total Obstacles Removed": player["Total Obstacles Removed"],
+            "Previous Rank": "-"
+        } for i, player in enumerate(total_obstacles_removed_data)],
+        "Table Header": "Total Obstacles Removed"
+    }
+    
+    update_table(total_obstacles_removed_json_data, "Most Obstacles Removed")
+    
+    total_defenses_won_data = [{"Name": row["Name"], "Total Defenses Won": int(row["Total Defenses Won"])} for row in data]
+    
+    total_defenses_won_data.sort(key=lambda x: x["Total Defenses Won"], reverse=True)
+    
+    total_defenses_won_json_data = {
+        "Table Name": "Most Defenses Won",
+        "Table Data": [{
+            "Rank": i + 1,
+            "Player Name": player["Name"],
+            "Total Defenses Won": player["Total Defenses Won"],
+            "Previous Rank": "-"
+        } for i, player in enumerate(total_defenses_won_data)],
+        "Table Header": "Total Defenses Won"
+    }
+    
+    update_table(total_defenses_won_json_data, "Most Defenses Won")
+    
+    total_capacity_donated_data = [{"Name": row["Name"], "Total Capacity Donated": int(row["Total Capacity Donated"])} for row in data]
+    
+    total_capacity_donated_data.sort(key=lambda x: x["Total Capacity Donated"], reverse=True)
+    
+    total_capacity_donated_json_data = {
+        "Table Name": "Most Capacity Donated",
+        "Table Data": [{
+            "Rank": i + 1,
+            "Player Name": player["Name"],
+            "Total Capacity Donated": player["Total Capacity Donated"],
+            "Previous Rank": "-"
+        } for i, player in enumerate(total_capacity_donated_data)],
+        "Table Header": "Total Capacity Donated"
+    }
+    
+    update_table(total_capacity_donated_json_data, "Most Capacity Donated")
+    
+    total_stars_scored_for_clan_in_clan_war_battles_data = [{"Name": row["Name"], "Total Stars scored for clan in Clan War battles": int(row["Total Stars scored for clan in Clan War battles"])} for row in data]
+    
+    total_stars_scored_for_clan_in_clan_war_battles_data.sort(key=lambda x: x["Total Stars scored for clan in Clan War battles"], reverse=True)
+    
+    total_stars_scored_for_clan_in_clan_war_battles_json_data = {
+        "Table Name": "Most Stars scored for clan in Clan War battles",
+        "Table Data": [{
+            "Rank": i + 1,
+            "Player Name": player["Name"],
+            "Total Stars scored for clan in Clan War battles": player["Total Stars scored for clan in Clan War battles"],
+            "Previous Rank": "-"
+        } for i, player in enumerate(total_stars_scored_for_clan_in_clan_war_battles_data)],
+        "Table Header": "Total Stars scored for clan in Clan War battles"
+    }
+    
+    update_table(total_stars_scored_for_clan_in_clan_war_battles_json_data, "Most Stars scored for clan in Clan War battles")
+    
+    total_stars_scored_for_the_clan_in_clan_war_league_battles_data = [{"Name": row["Name"], "Total Stars scored for the clan in Clan War League battles": int(row["Total Stars scored for the clan in Clan War League battles"])} for row in data]
+    
+    total_stars_scored_for_the_clan_in_clan_war_league_battles_data.sort(key=lambda x: x["Total Stars scored for the clan in Clan War League battles"], reverse=True)
+    
+    total_stars_scored_for_the_clan_in_clan_war_league_battles_json_data = {
+        "Table Name": "Most Stars scored for the clan in Clan War League battles",
+        "Table Data": [{
+            "Rank": i + 1,
+            "Player Name": player["Name"],
+            "Total Stars scored for the clan in Clan War League battles": player["Total Stars scored for the clan in Clan War League battles"],
+            "Previous Rank": "-"
+        } for i, player in enumerate(total_stars_scored_for_the_clan_in_clan_war_league_battles_data)],
+        "Table Header": "Total Stars scored for the clan in Clan War League battles"
+    }
+    
+    update_table(total_stars_scored_for_the_clan_in_clan_war_league_battles_json_data, "Most Stars scored for the clan in Clan War League battles")
+    
+    weaponized_town_halls_destroyed_data = [{"Name": row["Name"], "Weaponized Town Halls Destroyed": int(row["Weaponized Town Halls Destroyed"])} for row in data]
+    
+    weaponized_town_halls_destroyed_data.sort(key=lambda x: x["Weaponized Town Halls Destroyed"], reverse=True)
+    
+    weaponized_town_halls_destroyed_json_data = {
+        "Table Name": "Most Weaponized Town Halls Destroyed",
+        "Table Data": [{
+            "Rank": i + 1,
+            "Player Name": player["Name"],
+            "Weaponized Town Halls Destroyed": player["Weaponized Town Halls Destroyed"],
+            "Previous Rank": "-"
+        } for i, player in enumerate(weaponized_town_halls_destroyed_data)],
+        "Table Header": "Weaponized Town Halls Destroyed"
+    }
+    
+    update_table(weaponized_town_halls_destroyed_json_data, "Most Weaponized Town Halls Destroyed")
+    
+    total_times_super_troops_boosted_data = [{"Name": row["Name"], "Total Times Super Troops boosted": int(row["Total Times Super Troops boosted"])} for row in data]
+    
+    total_times_super_troops_boosted_data.sort(key=lambda x: x["Total Times Super Troops boosted"], reverse=True)
+    
+    total_times_super_troops_boosted_json_data = {
+        "Table Name": "Most Times Super Troops boosted",
+        "Table Data": [{
+            "Rank": i + 1,
+            "Player Name": player["Name"],
+            "Total Times Super Troops boosted": player["Total Times Super Troops boosted"],
+            "Previous Rank": "-"
+        } for i, player in enumerate(total_times_super_troops_boosted_data)],
+        "Table Header": "Total Times Super Troops boosted"
+    }
+    
+    update_table(total_times_super_troops_boosted_json_data, "Most Times Super Troops boosted")
+    
+    total_monoliths_destroyed_data = [{"Name": row["Name"], "Total Monoliths Destroyed": int(row["Total Monoliths Destroyed"])} for row in data]
+    
+    total_monoliths_destroyed_data.sort(key=lambda x: x["Total Monoliths Destroyed"], reverse=True)
+    
+    total_monoliths_destroyed_json_data = {
+        "Table Name": "Most Monoliths Destroyed",
+        "Table Data": [{
+            "Rank": i + 1,
+            "Player Name": player["Name"],
+            "Total Monoliths Destroyed": player["Total Monoliths Destroyed"],
+            "Previous Rank": "-"
+        } for i, player in enumerate(total_monoliths_destroyed_data)],
+        "Table Header": "Total Monoliths Destroyed"
+    }
+    
+    update_table(total_monoliths_destroyed_json_data, "Most Monoliths Destroyed")
+    
+    attack_wins_in_season_data = [{"Name": row["Name"], "Attack Wins in Season": int(row["Attack Wins in Season"])} for row in data]
+    
+    attack_wins_in_season_data.sort(key=lambda x: x["Attack Wins in Season"], reverse=True)
+    
+    attack_wins_in_season_json_data = {
+        "Table Name": "Most Attack Wins in Season",
+        "Table Data": [{
+            "Rank": i + 1,
+            "Player Name": player["Name"],
+            "Attack Wins in Season": player["Attack Wins in Season"],
+            "Previous Rank": "-"
+        } for i, player in enumerate(attack_wins_in_season_data)],
+        "Table Header": "Attack Wins in Season"
+    }
+    
+    update_table(attack_wins_in_season_json_data, "Most Attack Wins in Season")
+    
+    best_trophies_data = [{"Name": row["Name"], "Best Trophies": int(row["Best Trophies"])} for row in data]
+    
+    best_trophies_data.sort(key=lambda x: x["Best Trophies"], reverse=True)
+    
+    best_trophies_json_data = {
+        "Table Name": "Best Trophies",
+        "Table Data": [{
+            "Rank": i + 1,
+            "Player Name": player["Name"],
+            "Best Trophies": player["Best Trophies"],
+            "Previous Rank": "-"
+        } for i, player in enumerate(best_trophies_data)],
+        "Table Header": "Best Trophies"
+    }
+    
+    update_table(best_trophies_json_data, "Best Trophies")
+    
     #print(multiplayer_battles_won_json_data)
     
     # Call the update function with the generated JSON data
-    update_total_multiplayer_battles_won(multiplayer_battles_won_json_data)
-    update_total_wall_destroyed(wall_destroyed_json_data)
+    #update_total_multiplayer_battles_won(multiplayer_battles_won_json_data)
+    #update_total_wall_destroyed(wall_destroyed_json_data)
+    #update_total_obstacles_removed(total_obstacles_removed_json_data)
+    
 
 # Call the function with the CSV file path
 process_csv_and_update_db('full_players_data_from_clan.csv')
