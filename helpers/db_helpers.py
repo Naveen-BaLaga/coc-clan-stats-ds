@@ -5,6 +5,7 @@ import sys
 MONGODB_CONNECTION_STRING = config('MONGODB_CONNECTION_STRING')
 DB_NAME = config('DB_NAME')
 TABLES_COLLECTION_NAME = config('TABLES_COLLECTION_NAME')
+WARS_COLLECTION_NAME = config('WARS_COLLECTION_NAME')
 
 try:
   client = pymongo.MongoClient(MONGODB_CONNECTION_STRING)
@@ -32,7 +33,25 @@ def update_table(json_data, table_name):
     print("Error in updating " + str(table_name) + ": " + str(e))
     return False
   
-
+def update_wars(json_data, opponent_tag):
+  try:
+    db = client[DB_NAME]   
+    collection = db[WARS_COLLECTION_NAME]
+    opponent_tag = opponent_tag[1:]
+    # Find or insert entry with key "Opponent Tag" equal to the opponent tag
+    entry = collection.find_one({"_id": opponent_tag})
+    if entry:
+      # Update existing entry
+      collection.update_one({"_id": opponent_tag}, {"$set": json_data})
+    else:
+      json_data["_id"] = opponent_tag
+      # Insert new entry
+      collection.insert_one(json_data)
+    return True
+  except Exception as e:
+    print("Error in updating " + str(opponent_tag) + ": " + str(e))
+    return False
+  
 '''
 def update_total_multiplayer_battles_won(json_data):
     try:

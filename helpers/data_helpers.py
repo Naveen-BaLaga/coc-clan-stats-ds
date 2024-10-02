@@ -43,6 +43,28 @@ def get_player_data(base_url, player_id):
         # Handle any exceptions, e.g., network errors
         print(f"Error: {e}")
         return None
+    
+def get_current_war_data(base_url, clan_id):
+    api_endpoint = f"{base_url}/get-current-war"
+    
+    # Set up parameters for the API call
+    params = {'clan-id': clan_id}
+    
+    try:
+        # Make the HTTP GET request
+        response = requests.get(api_endpoint, params=params)
+
+        # Check if the request was successful (status code 200)
+        if response.status_code == 200:
+            # Return the JSON response data
+            return response.json()
+        else:
+            # Return null for unsuccessful requests
+            return None
+    except Exception as e:
+        # Handle any exceptions, e.g., network errors
+        print(f"Error: {e}")
+        return None
 '''
 # Example usage:
 base_url = "https://example-api.com"
